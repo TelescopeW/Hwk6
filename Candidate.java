@@ -3,6 +3,7 @@ package Hwk6;
 /**
  * A candidate in an election.
  * @author Alex W, Timothy T, Miles M
+ * @version 1.1.0
  */
 public class Candidate implements Comparable<Candidate> {
     private String name;
