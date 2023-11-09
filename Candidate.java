@@ -7,25 +7,40 @@ package Hwk6;
 public class Candidate implements Comparable<Candidate> {
     private String name;
     private int voteCount;
-    private boolean eliminated;
+    private int rank;
 
-    public Candidate(String name) {
+    public Candidate(String name, int theRank) {
         this.name = name;
         this.voteCount = 0;
+        this.rank = theRank;
     }
 
+    /**
+     * Returns the name of this candidate.
+     * @return the name of this candidate
+     */
    public String getName() {
       return name;
    }
 
+   /**
+    * Returns the number of votes for this candidate.
+    * @return the number of votes for this candidate
+    */
    public int getVoteCount() {
       return voteCount;
    }
 
+   /**
+    * Increments the vote count for this candidate.
+    */
    public void incrementVoteCount() {
       voteCount++;
    }
    
+   /**
+    * @return the rank of this candidate
+    */
    @Override
    public int compareTo(Candidate c) {
       //return Integer.compare(this.rank, c.rank);

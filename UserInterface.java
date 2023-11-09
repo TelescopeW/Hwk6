@@ -1,10 +1,21 @@
+package Hwk6;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * User interface for the program.
+ * @author Alex W, Timothy T, Miles M
+ * @version 1.1.0
+ */
 public class UserInterface{
    
+   /**
+    * Main method for the program
+    * @param args command line arguments
+    */
    public static void main(String[] args){
    
       Scanner scan = new Scanner(System.in);
