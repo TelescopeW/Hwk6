@@ -26,41 +26,36 @@ public class UserInterface{
          
          Queue<Ballot> ballots = new LinkedList<>();
          
-         while(look.hasNextLine()){
-            PriorityQueue<Candidate> rankings = new PriorityQueue<>();//maybe remove
-
+         while(look.hasNextLine()){ // loop through each ballot line
             Ballot aBallot = new Ballot();
             int count = 0;
-            String line = look.nextLine();
-            line = line.replaceAll("#", "");//remove all special characters
-            String[] ranks = line.split(",");
-            System.out.println(Arrays.toString(ranks));
+            String line = look.nextLine(); //get teh next line
+            line = line.replaceAll("#", ""); //remove all special characters
+            String[] ranks = line.split(","); //separate the rankings
+            //System.out.println(Arrays.toString(ranks));
             for(String s : ranks) {
                Scanner word = new Scanner(s);
                if(word.next().equals("Ranked")) {
                   Candidate c = new Candidate(theCandidates[count], word.nextInt());
-                  //aBallot.addRanking(c);
-                  rankings.offer(c);
+                  aBallot.addRanking(c);
                }
                count++;
                
 
             }
-            //System.out.print(aBallot.toString());            
-            ballots.offer(aBallot);
-            //System.out.println(ballots.toString());
-            /*
-            Scanner line = new Scanner(look.nextLine());
-            if(line.next().equals("Ranked")){
-               System.out.println(line.nextInt());
-               int rank = line.nextInt();
-               Candidate c = new Candidate(theCandidates[count], rank);
-               aBallot.addRanking(c);
+            if(aBallot.check()){
+               ballots.offer(aBallot);
             }
-            count++;
-            */
          }
+         
          ElectionRound election = new ElectionRound(ballots);
+         
+         
+         
+         String winner = null;
+         while(!election.isWinner()) {
+            winner = election.run();// The loser of each round, or winner if majority vote
+         }
          
       }catch(FileNotFoundException e){
          System.out.println("File not found: " + e);

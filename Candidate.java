@@ -1,23 +1,29 @@
-package Hwk6;
-
-/**
- * A candidate in an election.
- * @author Alex W, Timothy T, Miles M
- */
-public class Candidate implements Comparable<Candidate> {
-    private String name;
-    private int voteCount;
-    private boolean eliminated;
-
-    public Candidate(String name) {
-        this.name = name;
-        this.voteCount = 0;
-    }
-
-   public String getName() {
-      return name;
+public class Candidate implements Comparable<Candidate>{
+   private String name;
+   private int voteCount;
+   private int rank;
+   
+   public Candidate(String name, int theRank) {
+      this.name = name;
+      this.voteCount = 0;
+      this.rank = theRank;
+   }
+   
+   public Candidate(String name) {
+      this.name = name;
    }
 
+   public String getName() {
+      return this.name;
+   }
+   
+   public int getRank() {
+      return this.rank;
+   }
+   
+   public void lowerRank() {
+      this.rank--;
+   }
    public int getVoteCount() {
       return voteCount;
    }
