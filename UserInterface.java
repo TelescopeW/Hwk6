@@ -25,8 +25,13 @@ public class UserInterface{
          
          
          Queue<Ballot> ballots = new LinkedList<>();
+         System.out.println("===============================");
+         System.out.println("Ranked-Choice Vote Ballot Counter");
+         System.out.println("===============================");
          
+         int ballotCount = 0;
          while(look.hasNextLine()){ // loop through each ballot line
+            ballotCount++;
             Ballot aBallot = new Ballot();
             int count = 0;
             String line = look.nextLine(); //get teh next line
@@ -41,7 +46,7 @@ public class UserInterface{
                }
                count++;
                
-
+            
             }
             if(aBallot.check()){
                ballots.offer(aBallot);
@@ -50,12 +55,25 @@ public class UserInterface{
          
          ElectionRound election = new ElectionRound(ballots);
          
-         
+         System.out.println(ballotCount + " ballots received");
          
          String winner = null;
+         int round = 1;
          while(!election.isWinner()) {
+            System.out.println();
+            System.out.println("--------------------------------Round " + round + 
+                               "--------------------------------");
             winner = election.run();// The loser of each round, or winner if majority vote
+
+            System.out.println();
+            System.out.println(winner + " eliminated.");
+            System.out.println();
+            round++;
          }
+         System.out.println("--------------------------------RESULTS--------------------------------");
+         System.out.println("WINNER BY MAJORITY: [" + ballots.peek().peek().getName() + "]");
+         System.out.println("-----------------------------------------------------------------------");
+         election.run();      
          
       }catch(FileNotFoundException e){
          System.out.println("File not found: " + e);

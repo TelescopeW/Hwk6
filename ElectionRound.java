@@ -70,7 +70,6 @@ public class ElectionRound {
          ballots.offer(b);
          
       }
-      //printHash(this.candCount);
       
       // By this point all the ballots have top vote counted
       // Now just calculate % of vote and eliminate lowest or return winner
@@ -83,16 +82,23 @@ public class ElectionRound {
       
       
       //loop through and find smallest or winner
+      int candCnt = 0;
       for (Map.Entry<String,Integer> mapElement : candCount.entrySet()){
+         candCnt++;
       
          double perc = Math.round(((mapElement.getValue()*1.0)/validVotes)*1000.0)/1000.0;
-        
+         
+         System.out.println(mapElement.getKey() + ":	 " + mapElement.getValue() + " votes	(" + 
+                            perc + ")");
+         /*
          if(perc >= 0.5) {
          
             this.winner = true;
             return mapElement.getKey();
             
-         } else if(start) {//set initial values
+         } 
+         */
+         if(start) {//set initial values
          
             lowest = perc;         
             cand = mapElement.getKey();
@@ -106,23 +112,19 @@ public class ElectionRound {
          
          
       }
-      System.out.println(lowest);
+      
+      System.out.println("Total nonempty ballots: " + validVotes);
+      
       this.removeCandidates(cand);
-               
+      if(candCnt == 2) {
+         this.winner = true;
+      }         
       return cand;       
    }
    
    public boolean isWinner() {
       return this.winner;
    } 
-    
-    
-   private void printHash(HashMap<String,Integer> hm) {
-      for (Map.Entry<String, Integer> entry : hm.entrySet()) {
-         System.out.println(entry.getKey() + ": " + entry.getValue());
-      }
-   }
-   
    
    public String toString() {
       String temp = "";
