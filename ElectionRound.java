@@ -1,16 +1,23 @@
 
 import java.util.*;
 
+/**
+ * The ElectionRound class represents a single round of an election.
+ * It contains a queue of ballots, the name of the eliminated candidate,
+ * the total number of valid ballots, a map of candidate counts, and a flag indicating if there's a winner.
+ * @authors Alex W, Timothy T, Miles M
+ */
 public class ElectionRound {
    private Queue<Ballot> ballots;
    private String eliminatedCandidate;
    private int totalValidBallots;
-   
-   
-   private HashMap<String,Integer> candCount;
-   
-   private boolean winner;
+   private HashMap<String,Integer> candCount; //candidate name, vote count
+   private boolean winner; //if there is a winner
 
+   /**
+    * Constructs an ElectionRound with the given queue of ballots.
+    * @param theBallots the queue of ballots
+    */
    public ElectionRound(Queue<Ballot> theBallots) {
       this.ballots = theBallots;
       this.eliminatedCandidate = null;
@@ -40,16 +47,24 @@ public class ElectionRound {
       return ballots.peek();
    }
    
+   /**
+    * Removes the candidate from all ballots.
+    * @param theCandidate the candidate to be removed
+    */
    public void removeCandidates(String theCandidate) {
       candCount.clear();
       
+      //loop through and remove candidate from all ballots
       for(Ballot b : ballots) {
          b.removeCandidate(theCandidate);
       }
    }
    
    
-   // before running this, remove invalid ballots
+   /**
+    * Runs the election round.
+    * @return the name of the winner or the name of the candidate to be eliminated
+    */
    public String run() {
    
       int validVotes = 0;
@@ -112,20 +127,28 @@ public class ElectionRound {
          
          
       }
-      
+
       System.out.println("Total nonempty ballots: " + validVotes);
-      
-      this.removeCandidates(cand);
+
+      this.removeCandidates(cand); //remove candidate from all ballots
       if(candCnt == 2) {
          this.winner = true;
       }         
       return cand;       
    }
    
+   /**
+    * Returns true if there is a winner.
+    * @return true if there is a winner
+    */
    public boolean isWinner() {
       return this.winner;
    } 
    
+   /**
+    * Returns a string representation of the election round.
+    * @return a string representation of the election round
+    */
    public String toString() {
       String temp = "";
       for(Ballot b : ballots) {

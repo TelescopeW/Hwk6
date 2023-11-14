@@ -1,6 +1,12 @@
 
 import java.util.*;
 
+/**
+ * The Ballot class represents a single ballot.
+ * It contains a priority queue of candidates.
+ * @authors Alex W, Timothy T, Miles M
+ * @version 13/11/2023
+ */
 public class Ballot {
    private PriorityQueue<Candidate> rankings;
 
